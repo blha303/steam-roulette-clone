@@ -7,9 +7,10 @@ function getGameRandomlyHooray(uid) {
         var uid = "blha303";
     }
     $.getJSON('http://blha303.com.au:7576/getdata?id=' + uid, function(data) {
-        $("#game")[0].innerHTML = "Play " + data["name"] + ": <a href=\"steam://play/" + data["appid"] + "\">Click here</a><br><a href=\"steam://play/" + data["appid"] + "\"><img src=\"" + data["logo"] + "\" alt=\"" + data["name"] + "\">";
+        $("#name")[0].innerHTML = "<b><a href=\"steam://play/" + data["appid"] + "\">" + data["name"] + "</a>";
+        $("#lastplayed")[0].innerHTML = "<i>Last played: " + data["since"] + "</i>";
+        $("#logo")[0].innerHTML = "<a href=\"steam://play/" + data["appid"] + "\"><img src=\"" + data["logo"] + "\" alt=\"" + data["name"] + "\">";
     });
-//    $("#game").load('http://blha303.com.au:7576/getdata?id=' + uid);
 }
 </script>
 <title>Steam Roulette Clone</title>
@@ -19,6 +20,8 @@ function getGameRandomlyHooray(uid) {
 <label for="input">http://steamcommunity.com/id/</label><input type="text" placeholder="blha303" name="input" id="input">
 <input type="submit" value="Get random game">
 </form>
-<p id="game"></p>
+<div id="gameinfo">
+<span id="name"></span> <span id="lastplayed"></span><br>
+<spam id="logo"></span>
 </body>
 </html>
