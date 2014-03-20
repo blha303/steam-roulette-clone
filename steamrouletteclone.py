@@ -4,7 +4,7 @@ import requests
 from random import choice
 from time import time
 
-from flask import request, Flask
+from flask import request, Flask, make_response
 
 app = Flask(__name__)
 
@@ -15,7 +15,12 @@ def getdata():
     except KeyError:
         return "No user ID provided"
 
-    script = soup.findAll('script')[11].text
+    try:
+        script = soup.findAll('script')[11].text
+    except IndexError:
+        resp = make_response(json.dumps({"name": "Couldn't get Steam information", "appid": "0", "logo": "http://puushbrowse.blha303.com.au/broken.png"}))
+        resp.headers["Access-Control-Allow-Origin"] = "http://steamroulette.blha303.com.au";
+        return resp
     data = json.loads(script.strip().split("\r\n")[0][14:-1])
 
     options = []
@@ -24,7 +29,13 @@ def getdata():
         if "last_played" in a:
             if a["last_played"] < time()-604800:
                 options.append(a)
+        else:
+            a["name"] += " <i>(never played)</i>"
+            options.append(a)
 
-    return "Play {name}: <a href=\"steam://play/{appid}\">Click here</a>".format(**choice(options))
+    resp = make_response(json.dumps(choice(options)))
+#    resp = make_response("Play {name}: <a href=\"steam://play/{appid}\">Click here</a><br><a href=\"steam://play/{appid}\"><img src=\"{logo}\" alt=\"{name}\">".format(**choice(options)))
+    resp.headers["Access-Control-Allow-Origin"] = "http://steamroulette.blha303.com.au";
+    return resp
 
-app.run(host='0.0.0.0', port=7576)
+app.run(host='0.0.0.0', port=7576, debug=True)
