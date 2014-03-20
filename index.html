@@ -16,9 +16,9 @@ function getGameRandomlyHooray(uid) {
 <title>Steam Roulette Clone</title>
 </head>
 <body>
-<form onSubmit="getGameRandomlyHooray(document.getElementById('input').value); return false;">
-<label for="input">http://steamcommunity.com/id/</label><input type="text" placeholder="blha303" name="input" id="input">
-<input type="submit" value="Get random game">
+<form id="form" onSubmit="getGameRandomlyHooray(document.getElementById('input').value); return false;">
+<label for="input">http://steamcommunity.com/id/</label><input type="text" placeholder="blha303" id="input">
+<input type="submit" id="submit" value="Get random game">
 </form>
 <div id="gameinfo">
 <span id="name"></span> <span id="lastplayed"></span><br>
