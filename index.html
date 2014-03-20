@@ -3,6 +3,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 function getGameRandomlyHooray(uid) {
+    $("#name")
     if (!uid) {
         var uid = "blha303";
     }
@@ -19,12 +20,27 @@ function getGameRandomlyHooray(uid) {
 
 <a href="https://github.com/blha303/steam-roulette-clone"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github-camo.global.ssl.fastly.net/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
 
+<h1>Steam Roulette</h1>
+<p>Enter your <a href="http://google.com/search?q=how+to+set+steam+profile+id">Steam profile ID</a> in the box below</p>
 <form id="form" onSubmit="getGameRandomlyHooray(document.getElementById('input').value); return false;">
 <label for="input">http://steamcommunity.com/id/</label><input type="text" placeholder="blha303" id="input">
 <input type="submit" id="submit" value="Get random game">
 </form>
+<div id="loading"><img src="loading.gif"></div>
 <div id="gameinfo">
 <span id="name"></span> <span id="lastplayed"></span><br>
-<spam id="logo"></span>
+<span id="logo"></span>
 </body>
+<script>
+var $loading = $("#loading");
+$loading.hide();
+$(document)
+  .ajaxStart(function () {
+    $.each($("#gameinfo").children(), function(i,v) { v.innerHTML = ""; });
+    $loading.show();
+  })
+  .ajaxStop(function () {
+    $loading.hide();
+  });
+</script>
 </html>
