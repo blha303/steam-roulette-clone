@@ -19,7 +19,7 @@ def getdata():
         script = soup.findAll('script')[11].text
     except IndexError:
         resp = make_response(json.dumps({"name": "Couldn't get Steam information", "appid": "0", "logo": "http://puushbrowse.blha303.com.au/broken.png"}))
-        resp.headers["Access-Control-Allow-Origin"] = "http://steamroulette.blha303.com.au";
+        resp.headers["Access-Control-Allow-Origin"] = "http://steamroulette.blha303.com.au, http://steamroulette.ml";
         return resp
     data = json.loads(script.strip().split("\r\n")[0][14:-1])
 
@@ -35,7 +35,7 @@ def getdata():
 
     resp = make_response(json.dumps(choice(options)))
 #    resp = make_response("Play {name}: <a href=\"steam://play/{appid}\">Click here</a><br><a href=\"steam://play/{appid}\"><img src=\"{logo}\" alt=\"{name}\">".format(**choice(options)))
-    resp.headers["Access-Control-Allow-Origin"] = "http://steamroulette.blha303.com.au";
+    resp.headers["Access-Control-Allow-Origin"] = "http://steamroulette.blha303.com.au, http://steamroulette.ml";
     return resp
 
 app.run(host='0.0.0.0', port=7576, debug=True)
