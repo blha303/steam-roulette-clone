@@ -3,6 +3,8 @@ import json
 import requests
 from random import choice
 from time import time
+import ago
+from datetime import datetime
 
 from flask import request, Flask, make_response
 
@@ -28,6 +30,7 @@ def getdata():
     for a in data:
         if "last_played" in a:
             if a["last_played"] < time()-604800:
+                a["since"] = ago.human(datetime.fromtimestamp(a["last_played"]))
                 options.append(a)
         else:
             a["name"] += " <i>(never played)</i>"
