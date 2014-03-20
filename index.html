@@ -1,0 +1,24 @@
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+function getGameRandomlyHooray(uid) {
+    if (!uid) {
+        var uid = "blha303";
+    }
+    $.getJSON('http://blha303.com.au:7576/getdata?id=' + uid, function(data) {
+        $("#game")[0].innerHTML = "Play " + data["name"] + ": <a href=\"steam://play/" + data["appid"] + "\">Click here</a><br><a href=\"steam://play/" + data["appid"] + "\"><img src=\"" + data["logo"] + "\" alt=\"" + data["name"] + "\">";
+    });
+//    $("#game").load('http://blha303.com.au:7576/getdata?id=' + uid);
+}
+</script>
+<title>Steam Roulette Clone</title>
+</head>
+<body>
+<form onSubmit="getGameRandomlyHooray(document.getElementById('input').value); return false;">
+<label for="input">http://steamcommunity.com/id/</label><input type="text" placeholder="blha303" name="input" id="input">
+<input type="submit" value="Get random game">
+</form>
+<p id="game"></p>
+</body>
+</html>
