@@ -15,3 +15,5 @@ Usage
 * To set your Steam profile ID, here's the first Google result: http://www.lastlightforum.com/showthread.php?t=959
 
 [Site source](https://github.com/blha303/steam-roulette-clone/tree/site)
+
+MIT license, go nuts.
